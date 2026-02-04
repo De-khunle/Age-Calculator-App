@@ -4,6 +4,16 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
 
 body {
     background: rgba(209, 216, 222, 0.815);
@@ -24,23 +34,30 @@ section {
 .input {
     display: flex;
 }
-form div{
+form > div{
     display: flex;
     flex-direction: column;
 }
 form label {
-    font-size: .5rem;
+    font-size: .6rem;
     font-weight: 800;
     color: rgb(162 166 169);
-    margin-bottom: .2rem;
-    letter-spacing: 1.5px;
+    margin-bottom: .3rem;
+    letter-spacing: 2px;
+    display: block;
 }
 .form input {
-    width: 4rem;
-    height: 1.7rem;
-    font-weight: bold;
-    border: 1px solid rgba(209, 216, 222, 0.815);
-    box-shadow: none;
+    width: 4.5rem;
+    padding: 0.5rem 0.3rem;
+    font-size: 1rem;
+    font-weight: 700;
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+    outline: none;
+}
+.form input::placeholder {
+    color: #aaa;
+    font-weight: 400;
 }
 .form form{
     display: flex;
@@ -54,14 +71,28 @@ form label {
 .s-sec {
     display: flex;
     align-items: center;
-    min-width: 18rem;
+    min-width: 20rem;
+    position: relative;
 }
+/* .s-sec::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: #ccc;
+    z-index: 0;
+} */
  .icon {
     width: 3rem;
     height: 3rem;
-    color: #7c27df;
     display: block;
+    color: #7c27df;
     margin-left: -5px;
+}
+.icon:hover {
+    color: black;
  }
 h1 {
     font-weight: 1000;
@@ -72,3 +103,44 @@ h1 {
     color: #7c27df;
     margin-right: .2rem;
  }
+ .input-error {
+    border-color: #ff5757 !important;
+ }
+ .label-error {
+    color: #ff5757;
+ }
+.error-p {
+    font-size: .4rem;
+    margin-top: .1rem;
+    color: #ff5757;
+    font-weight: 400;
+    letter-spacing: .1px;
+    font-style: italic;
+    display: none;
+}
+.t-display {
+    display: block;
+}
+
+
+
+@media (max-width: 31.25rem) {
+    .s-sec {
+    display: flex;
+    align-items: center;
+    min-width: inherit;
+    /* position: relative; */
+    margin: 2rem 0 1rem;
+}
+ .icon {
+    margin-left: -5px;
+    position: absolute;
+    left: 43%;
+    z-index: 3;
+    background: #fff;
+}
+.hr {
+    /* z-index: 0; */
+    position: relative;
+}
+}
