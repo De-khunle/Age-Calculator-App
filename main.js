@@ -6,14 +6,75 @@
         const errorP = document.querySelectorAll('.error-p');
         const label = document.querySelectorAll('label');
 
-        //for-loop for individual input style
-        [dayInput, monthInput, yearInput].forEach((input, index) => {
-            input.addEventListener('click', () => {
-                input.classList.remove('input-error');
-                errorP[index].classList.remove('t-display');
-                label[index].classList.remove('label-error');
-            })
-        });
+
+        let hasError = false;
+
+        // individual empty Input value
+        dayInput.addEventListener('input', function () {
+            const birthDay = Number(dayInput.value);
+            if (dayInput.value === '') {
+                dayInput.classList.add('input-error');
+                errorP[0].classList.add('t-display');
+                label[0].classList.add('label-error');
+                hasError = true;
+            } 
+            else if (isNaN(birthDay) || birthDay < 1 || birthDay > 31) {
+                dayInput.classList.add('input-error');
+                errorP[0].textContent = 'Must be a valid day';
+                errorP[0].classList.add('t-display');
+                label[0].classList.add('label-error');
+                hasError = true;
+            }
+            else {
+                dayInput.classList.remove('input-error');
+                errorP[0].classList.remove('t-display');
+                label[0].classList.remove('label-error');
+                hasError = false;
+            }
+        })
+        monthInput.addEventListener('input', function () {
+            const rawwMonth = Number(monthInput.value);
+            if (monthInput.value === '') {
+                monthInput.classList.add('input-error');
+                errorP[1].classList.add('t-display');
+                label[1].classList.add('label-error');
+                hasError = true;
+            } else if (isNaN(rawwMonth) || rawwMonth < 1 || rawwMonth > 12) {
+                monthInput.classList.add('input-error');
+                errorP[1].textContent = 'Must be a valid month';
+                errorP[1].classList.add('t-display');
+                label[1].classList.add('label-error');
+                hasError = true;
+            } else {
+                monthInput.classList.remove('input-error');
+                errorP[1].classList.remove('t-display');
+                label[1].classList.remove('label-error');
+                hasError = false;
+            }
+        })
+        yearInput.addEventListener('input', function () {    
+            const birthYear = Number(yearInput.value);
+            const currentYear = new Date().getFullYear();
+            if (yearInput.value === '') {
+                yearInput.classList.add('input-error');
+                errorP[2].classList.add('t-display');
+                label[2].classList.add('label-error');
+                hasError = true;
+            }     
+            else if (isNaN(birthYear) || birthYear > currentYear) {
+                yearInput.classList.add('input-error');
+                errorP[2].textContent = 'Must be in the past';
+                errorP[2].classList.add('t-display');
+                label[2].classList.add('label-error');
+                hasError = true;
+            }     
+            else {
+                yearInput.classList.remove('input-error');
+                errorP[2].classList.remove('t-display');
+                label[2].classList.remove('label-error');
+                hasError = false;
+            }
+        })
         
         iconBtn.addEventListener('click', () => {
             const birthDay = Number(dayInput.value);
@@ -30,7 +91,6 @@
                 return new Date(year, month, 0).getDate();
             }
 
-            let hasError = false;
             // empty Input value
             if (dayInput.value === '') {
                 dayInput.classList.add('input-error');
@@ -50,7 +110,9 @@
                 label[2].classList.add('label-error');
                 hasError = true;
             }
-            if(hasError){return;};
+
+            if (
+            dayInput.classList.contains('input-error') || monthInput.classList.contains('input-error') || yearInput.classList.contains('input-error')) {return;}
 
             //error for invalid day
             if (birthDay < 1 || birthDay > 31) {
@@ -112,3 +174,4 @@
             span[1].textContent = months;
             span[2].textContent = days;
         }
+       
